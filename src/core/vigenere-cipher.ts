@@ -9,7 +9,7 @@ type HashMap = {
 }
 
 const markIndexChar = (alphabet: string) => {
-  let hashMap: HashMap = {};
+  const hashMap: HashMap = {};
   for (let i = 0; i < alphabet.length; i++) {
     hashMap[alphabet[i]] = i;
   }

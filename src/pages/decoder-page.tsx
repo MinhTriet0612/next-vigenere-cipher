@@ -41,14 +41,3 @@ function ConfigComponent({ alphabet, secretKey, setAlphabet, setSecretKey }
     </div >
   </div>
 }
-
-
-function DropdownComponent() {
-  return <div>
-    <select>
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
-    </select>
-  </div>
-}
