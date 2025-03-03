@@ -72,13 +72,7 @@ const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string
   return decodedText;
 }
 
-const hashedText = vigenereCipherEncoder("minh triet", "cryptii", "zabcdefg@hijklmnopqrstuvwxy");
-const decodedText = vigenereCipherDecoder(hashedText, "cryptii", "zabcdefg@hijklmnopqrstuvwxy");
-
-console.log(hashedText);
-console.log(decodedText);
-
-export const vigenereCipher: VigenereCipher = {
+export const VigenereCipher: VigenereCipher = {
   encode: vigenereCipherEncoder,
   decode: vigenereCipherDecoder
 }
