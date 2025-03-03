@@ -12,7 +12,7 @@ export default function Home() {
           className={`p-2 rounded-lg ${typePage === "encode" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
           onClick={() => setTypePage("encode")}
         >
-          Encode
+          Encoder
         </button>
         <button
           className={`p-2 rounded-lg ${typePage === "decode" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
