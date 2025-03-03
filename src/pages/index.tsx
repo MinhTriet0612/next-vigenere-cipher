@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { EncodePage } from "./encode-page";
-import { DecodePage } from "./decoder-page";
+import DecodePage from "./decoder-page";
+import EncodePage from "./encode-page";
 
 
 export default function Home() {

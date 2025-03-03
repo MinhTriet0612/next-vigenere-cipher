@@ -3,7 +3,7 @@ import PlainTextComponent from "@/component/input";
 import { VigenereCipher } from "@/core/vigenere-cipher";
 import { useState } from "react";
 
-export function DecodePage() {
+export default function DecodePage() {
   const [text, setText] = useState("");
   const { decode } = VigenereCipher;
   const [alphabet, setAlphabet] = useState<string>("abcdefghijklmnopqrstuvwxyz");
