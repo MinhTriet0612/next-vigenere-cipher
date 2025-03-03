@@ -12,7 +12,7 @@ export default function EncodePage() {
     <div className="h-[100%] p-3 flex flex-col justify-center items-center gap-7 bg-gray-100 ">
       <PlainTextComponent title="Vigenere Encoder" text={text} setText={setText} />
       <div>
-        {(text.length * secretKey.length > 0) ?
+        {(alphabet.length * secretKey.length > 0) ?
           <p className="text-xl font-bold text-blue-600">
             Cipher Text: {encode(text, secretKey, alphabet)}
           </p>
