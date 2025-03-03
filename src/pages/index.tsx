@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EncodePage } from "./encode-page";
+import { DecodePage } from "./decoder-page";
 
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
           Decode
         </button>
       </div>
-      {typePage === "encode" ? <EncodePage /> : <div>Decode Page</div>}
+      {typePage === "encode" ? <EncodePage /> : <DecodePage />}
     </div>
   )
 }
