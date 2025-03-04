@@ -22,14 +22,17 @@ const vigenereCipherEncoder = (plainText: string, key: string, alphabet: string)
   let pKey = 0;
   let cipherText = "";
 
+  key = key.toLowerCase();
+
   const hashMap = markIndexChar(alphabet);
 
   while (pText < plainText.length) {
-    if (plainText[pText] === " ") {
-      cipherText += " ";
+    if (plainText[pText] === " " || hashMap[plainText[pText].toLowerCase()] === undefined) {
+      cipherText += plainText[pText];
       pText++;
       continue
     }
+
     if (plainText[pText] !== plainText[pText].toLowerCase()) {
       const cipherCharIndex = (hashMap[plainText[pText].toLowerCase()] + hashMap[key[pKey].toLowerCase()]) % alphabet.length;
       cipherText += alphabet[cipherCharIndex].toUpperCase();
@@ -55,18 +58,23 @@ const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string
   let pKey = 0;
   let decodedText = "";
 
+
+  key = key.toLowerCase();
   const hashMap = markIndexChar(alphabet);
 
+
   while (pText < cipherText.length) {
-    if (cipherText[pText] === " ") {
-      decodedText += " ";
+    if (cipherText[pText] === " " || hashMap[cipherText[pText].toLowerCase()] === undefined) {
+      decodedText += cipherText[pText];
       pText++;
       continue
     }
+
     if (cipherText[pText] !== cipherText[pText].toLowerCase()) {
       const decodedCharIndex = (hashMap[cipherText[pText].toLowerCase()] - hashMap[key[pKey].toLowerCase()] + alphabet.length) % alphabet.length;
       decodedText += alphabet[decodedCharIndex].toUpperCase();
     }
+
     else {
       const decodedCharIndex = (hashMap[cipherText[pText]] - hashMap[key[pKey]] + alphabet.length) % alphabet.length;
       decodedText += alphabet[decodedCharIndex];
@@ -78,9 +86,9 @@ const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string
       pKey = 0;
     }
   }
-
   return decodedText;
 }
+
 
 export const VigenereCipher: VigenereCipher = {
   encode: vigenereCipherEncoder,
