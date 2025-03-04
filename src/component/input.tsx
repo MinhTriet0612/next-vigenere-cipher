@@ -1,7 +1,7 @@
 
-export default function PlainTextComponent({ text, setText, title }: {
-  text: string;
-  setText: (text: string) => void;
+export default function PlainTextComponent({ value, onChange, title }: {
+  value: string;
+  onChange: (text: string) => void;
   title: string;
 }) {
   return (
@@ -10,8 +10,8 @@ export default function PlainTextComponent({ text, setText, title }: {
       <textarea
         className="w-96 h-40 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
         placeholder="Type here..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );
