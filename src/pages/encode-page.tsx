@@ -5,9 +5,10 @@ import { useState } from "react";
 
 export default function EncodePage() {
   const [text, setText] = useState("");
-  const { encode } = VigenereCipher;
+  const { encode, encodeAutoKey } = VigenereCipher;
   const [alphabet, setAlphabet] = useState<string>("abcdefghijklmnopqrstuvwxyz");
   const [secretKey, setScretKey] = useState<string>("cryptii");
+  const [hashType, setHashType] = useState<"repeatkey" | "autokey">("repeatkey");
   const [error, setError] = useState<string>("");
 
 
@@ -50,6 +51,10 @@ export default function EncodePage() {
     setAlphabet(alphabet);
   }
 
+  const onHashTypeChange = (hashType: string) => {
+    setHashType(hashType as "repeatkey" | "autokey");
+  }
+
   return <div className="flex flex-col md:flex-row">
     <div className="h-[100%] p-3 flex flex-col justify-center items-center gap-7 bg-gray-100 ">
       <PlainTextComponent title="Vigenere Encoder" value={text} onChange={onTextChange} />
@@ -65,7 +70,7 @@ export default function EncodePage() {
         }
       </div>
     </div>
-    <ConfigComponent alphabet={alphabet} onChangeAlphabet={onAlphabetChange} secretKey={secretKey} onChangeSecretKey={onKeyChange} />
+    <ConfigComponent alphabet={alphabet} onChangeAlphabet={onAlphabetChange} secretKey={secretKey} onChangeSecretKey={onKeyChange} hashType={hashType} onChangeHashType={onHashTypeChange} />
   </div>
 }
 
