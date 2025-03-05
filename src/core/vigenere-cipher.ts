@@ -1,4 +1,3 @@
-import { hash } from "crypto"
 
 type VigenereCipher = {
   encode: (plainText: string, key: string, alphabet: string) => string,
@@ -11,7 +10,7 @@ type HashMap = {
   [key: string]: number
 }
 
-export const markIndexChar = (alphabet: string): HashMap => {
+const markIndexChar = (alphabet: string): HashMap => {
   const hashMap: HashMap = {};
   for (let i = 0; i < alphabet.length; i++) {
     hashMap[alphabet[i]] = i;
@@ -24,7 +23,7 @@ const isUpperCase = (char: string): boolean => {
   return char !== char.toLowerCase();
 }
 
-export const vigenereCipherEncoder = (plainText: string, key: string, alphabet: string): string => {
+const vigenereCipherEncoder = (plainText: string, key: string, alphabet: string): string => {
   console.log("repeat key ne")
 
   if (plainText.length === 0) {
@@ -70,7 +69,7 @@ export const vigenereCipherEncoder = (plainText: string, key: string, alphabet: 
 }
 
 
-export const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string): string => {
+const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string): string => {
 
   if (cipherText.length === 0) {
     return "";
@@ -115,7 +114,7 @@ export const vigenereCipherDecoder = (cipherText: string, key: string, alphabet:
   return decodedText;
 }
 
-export const vigenereCipherEncoderAutoKey = (plainText: string, key: string, alphabet: string): string => {
+const vigenereCipherEncoderAutoKey = (plainText: string, key: string, alphabet: string): string => {
   console.log("auto key ne")
 
   if (plainText.length === 0) {
@@ -172,7 +171,7 @@ export const vigenereCipherEncoderAutoKey = (plainText: string, key: string, alp
 }
 
 
-export const vigenereCipherDecoderAutoKey = (cipherText: string, key: string, alphabet: string): string => {
+const vigenereCipherDecoderAutoKey = (cipherText: string, key: string, alphabet: string): string => {
   if (cipherText.length === 0) {
     return "";
   }
@@ -268,4 +267,14 @@ export const vigenereCipherDecoderAutoKey = (cipherText: string, key: string, al
 
   return decodedText;
 }
+
+
+export const VigenerCipher: VigenereCipher = {
+  encode: vigenereCipherEncoder,
+  decode: vigenereCipherDecoder,
+  encodeAutoKey: vigenereCipherEncoderAutoKey,
+  decodeAutoKey: vigenereCipherDecoderAutoKey
+}
+
+
 

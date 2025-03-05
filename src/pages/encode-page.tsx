@@ -1,15 +1,16 @@
 import ConfigComponent from "@/component/config-component";
 import PlainTextComponent from "@/component/input";
-import { vigenereCipherDecoder, vigenereCipherDecoderAutoKey, vigenereCipherEncoder, vigenereCipherEncoderAutoKey } from "@/core/vigenere-cipher";
+import { VigenerCipher} from "@/core/vigenere-cipher";
 import { useState, useEffect } from "react";
 
 export default function EncodePage() {
   const [text, setText] = useState("");
   const [alphabet, setAlphabet] = useState<string>("abcdefghijklmnopqrstuvwxyz");
   const [secretKey, setScretKey] = useState<string>("cryptii");
-  const [hashType, setHashType] = useState<"repeatkey" | "autokey">("repeatkey");
+  const [hashType, setHashType] = useState<"repeat" | "autokey">("repeat");
   const [error, setError] = useState<string>("");
   const [cipherText, setCipherText] = useState<string>("");
+  const { encode, encodeAutoKey } = VigenerCipher
 
 
   const onTextChange = (text: string) => {
@@ -52,19 +53,17 @@ export default function EncodePage() {
   }
 
   const onHashTypeChange = (hashType: string) => {
-    setHashType(hashType as "repeatkey" | "autokey");
-    console.log(hashType);
+    setHashType(hashType as "repeat" | "autokey");
   }
 
   useEffect(() => {
-
-    if (hashType === "repeatkey") {
-      setCipherText(vigenereCipherEncoder(text, secretKey, alphabet));
-    } else {
-      setCipherText(vigenereCipherEncoderAutoKey(text, secretKey, alphabet));
+    if (hashType === "repeat") {
+      setCipherText(encode(text, secretKey, alphabet));
+      return;
     }
-  }, [text, secretKey, alphabet, hashType]);
 
+    setCipherText(encodeAutoKey(text, secretKey, alphabet));
+  }, [text, secretKey, alphabet, hashType]);
 
 
   return <div className="flex flex-col md:flex-row">
