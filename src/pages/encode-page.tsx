@@ -1,15 +1,15 @@
 import ConfigComponent from "@/component/config-component";
 import PlainTextComponent from "@/component/input";
-import { VigenereCipher } from "@/core/vigenere-cipher";
-import { useState } from "react";
+import { vigenereCipherDecoder, vigenereCipherDecoderAutoKey, vigenereCipherEncoder, vigenereCipherEncoderAutoKey } from "@/core/vigenere-cipher";
+import { useState, useEffect } from "react";
 
 export default function EncodePage() {
   const [text, setText] = useState("");
-  const { encode, encodeAutoKey } = VigenereCipher;
   const [alphabet, setAlphabet] = useState<string>("abcdefghijklmnopqrstuvwxyz");
   const [secretKey, setScretKey] = useState<string>("cryptii");
   const [hashType, setHashType] = useState<"repeatkey" | "autokey">("repeatkey");
   const [error, setError] = useState<string>("");
+  const [cipherText, setCipherText] = useState<string>("");
 
 
   const onTextChange = (text: string) => {
@@ -53,7 +53,19 @@ export default function EncodePage() {
 
   const onHashTypeChange = (hashType: string) => {
     setHashType(hashType as "repeatkey" | "autokey");
+    console.log(hashType);
   }
+
+  useEffect(() => {
+
+    if (hashType === "repeatkey") {
+      setCipherText(vigenereCipherEncoder(text, secretKey, alphabet));
+    } else {
+      setCipherText(vigenereCipherEncoderAutoKey(text, secretKey, alphabet));
+    }
+  }, [text, secretKey, alphabet, hashType]);
+
+
 
   return <div className="flex flex-col md:flex-row">
     <div className="h-[100%] p-3 flex flex-col justify-center items-center gap-7 bg-gray-100 ">
@@ -65,14 +77,13 @@ export default function EncodePage() {
           </p>
           :
           <p className="text-xl font-bold text-blue-600">
-            Cipher Text: {encode(text, secretKey, alphabet)}
+            Cipher Text: {cipherText}
           </p>
         }
       </div>
     </div>
-    <ConfigComponent alphabet={alphabet} onChangeAlphabet={onAlphabetChange} secretKey={secretKey} onChangeSecretKey={onKeyChange} hashType={hashType} onChangeHashType={onHashTypeChange} />
+    <ConfigComponent alphabet={alphabet} onChangeAlphabet={onAlphabetChange} secretKey={secretKey} onChangeSecretKey={onKeyChange} hashType={hashType} onHashTypeChange={onHashTypeChange} />
   </div>
 }
-
 
 

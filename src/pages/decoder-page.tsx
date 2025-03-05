@@ -1,15 +1,17 @@
 
 import ConfigComponent from "@/component/config-component";
 import PlainTextComponent from "@/component/input";
-import { VigenereCipher } from "@/core/vigenere-cipher";
-import { useState } from "react";
+import { vigenereCipherDecoder, vigenereCipherDecoderAutoKey } from "@/core/vigenere-cipher";
+import { useEffect, useState } from "react";
 
 export default function DecodePage() {
   const [text, setText] = useState("");
-  const { decode } = VigenereCipher;
   const [alphabet, setAlphabet] = useState<string>("abcdefghijklmnopqrstuvwxyz");
   const [secretKey, setScretKey] = useState<string>("cryptii");
   const [error, setError] = useState<string>("");
+  const [hashType, setHashType] = useState<"repeatkey" | "autokey">("repeatkey");
+  const [plainText, setPlainText] = useState<string>("");
+
 
   const onTextChange = (text: string) => {
     if (text === "") {
@@ -50,6 +52,21 @@ export default function DecodePage() {
     setAlphabet(alphabet);
   }
 
+  const onHashTypeChange = (hashType: string) => {
+    setHashType(hashType as "repeatkey" | "autokey");
+  }
+
+
+  useEffect(() => {
+
+    if (hashType === "repeatkey") {
+
+      setPlainText(vigenereCipherDecoder(text, secretKey, alphabet));
+    } else {
+      setPlainText(vigenereCipherDecoderAutoKey(text, secretKey, alphabet));
+    }
+  }, [text, secretKey, alphabet, hashType]);
+
   return <div className="flex flex-col md:flex-row">
     <div className="h-[100%] p-3 flex flex-col justify-center items-center gap-7 bg-gray-100 ">
       <PlainTextComponent
@@ -63,7 +80,7 @@ export default function DecodePage() {
           </p>
           :
           <p className="text-xl font-bold text-blue-600">
-            Plain Text: {decode(text, secretKey, alphabet)}
+            Plain text: {plainText}
           </p>
         }
       </div>
@@ -72,7 +89,11 @@ export default function DecodePage() {
       alphabet={alphabet}
       onChangeAlphabet={onAlphabetChange}
       secretKey={secretKey}
-      onChangeSecretKey={onKeyChange} />
+      onChangeSecretKey={onKeyChange}
+      hashType={hashType}
+      onHashTypeChange={onHashTypeChange}
+    />
+
   </div>
 }
 

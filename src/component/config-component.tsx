@@ -36,8 +36,8 @@ export default function ConfigComponent({ alphabet, secretKey, hashType, onChang
         onChange={(e) => onHashTypeChange(e.target.value)}
         className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
       >
-        <option value="autokey">Autokey</option>
         <option value="repeat">Repeat</option>
+        <option value="autokey">Autokey</option>
       </select>
     </div>
   </div>

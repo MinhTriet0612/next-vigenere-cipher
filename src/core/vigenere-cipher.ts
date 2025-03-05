@@ -11,7 +11,7 @@ type HashMap = {
   [key: string]: number
 }
 
-const markIndexChar = (alphabet: string): HashMap => {
+export const markIndexChar = (alphabet: string): HashMap => {
   const hashMap: HashMap = {};
   for (let i = 0; i < alphabet.length; i++) {
     hashMap[alphabet[i]] = i;
@@ -24,7 +24,9 @@ const isUpperCase = (char: string): boolean => {
   return char !== char.toLowerCase();
 }
 
-const vigenereCipherEncoder = (plainText: string, key: string, alphabet: string): string => {
+export const vigenereCipherEncoder = (plainText: string, key: string, alphabet: string): string => {
+  console.log("repeat key ne")
+
   if (plainText.length === 0) {
     return "";
   }
@@ -68,7 +70,8 @@ const vigenereCipherEncoder = (plainText: string, key: string, alphabet: string)
 }
 
 
-const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string): string => {
+export const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string): string => {
+
   if (cipherText.length === 0) {
     return "";
   }
@@ -112,7 +115,9 @@ const vigenereCipherDecoder = (cipherText: string, key: string, alphabet: string
   return decodedText;
 }
 
-const vigenereCipherEncoderAutoKey = (plainText: string, key: string, alphabet: string): string => {
+export const vigenereCipherEncoderAutoKey = (plainText: string, key: string, alphabet: string): string => {
+  console.log("auto key ne")
+
   if (plainText.length === 0) {
     return "";
   }
@@ -167,7 +172,7 @@ const vigenereCipherEncoderAutoKey = (plainText: string, key: string, alphabet: 
 }
 
 
-const vigenereCipherDecoderAutoKey = (cipherText: string, key: string, alphabet: string): string => {
+export const vigenereCipherDecoderAutoKey = (cipherText: string, key: string, alphabet: string): string => {
   if (cipherText.length === 0) {
     return "";
   }
@@ -264,9 +269,3 @@ const vigenereCipherDecoderAutoKey = (cipherText: string, key: string, alphabet:
   return decodedText;
 }
 
-export const VigenereCipher: VigenereCipher = {
-  encode: vigenereCipherEncoder,
-  decode: vigenereCipherDecoder,
-  encodeAutoKey: vigenereCipherEncoderAutoKey,
-  decodeAutoKey: vigenereCipherDecoderAutoKey
-}
