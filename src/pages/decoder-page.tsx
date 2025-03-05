@@ -63,7 +63,7 @@ export default function DecodePage() {
           </p>
           :
           <p className="text-xl font-bold text-blue-600">
-            Cipher Text: {decode(text, secretKey, alphabet)}
+            Plain Text: {decode(text, secretKey, alphabet)}
           </p>
         }
       </div>
